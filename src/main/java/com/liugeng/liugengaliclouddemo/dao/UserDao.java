@@ -13,5 +13,4 @@ public interface UserDao extends JpaRepository<UserDto, Long> {
 
 	List<UserDto> findAll();
 
-
 }

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,9 +16,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(indexes = {
-	@Index(name = "account_index", columnList = "account", unique = true)
-})
+@Table(
+	name = "user",
+	uniqueConstraints = {@UniqueConstraint(columnNames = {"account"})},
+	indexes = {@Index(name = "account_index", columnList = "account", unique = true),}
+)
 public class UserDto{
 
 	@Id
@@ -35,5 +38,8 @@ public class UserDto{
 
 	@Column
 	private String info;
+
+	@Column
+	private Integer age;
 
 }

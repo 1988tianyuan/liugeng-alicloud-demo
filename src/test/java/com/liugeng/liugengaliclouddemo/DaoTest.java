@@ -31,7 +31,7 @@ public class DaoTest extends LiugengAlicloudDemoApplicationTests {
 
 //	@Test
 //	public void saveOne() {
-//		userDao.save(new UserDto(null, "yexiaozhou","叶小舟", "123456", "我是叶小舟"));
+//		userDao.save(new UserDto(null, "yexiaozhou","叶小舟", "123456", "我是叶小舟", 29));
 //	}
 //
 //	@Test
