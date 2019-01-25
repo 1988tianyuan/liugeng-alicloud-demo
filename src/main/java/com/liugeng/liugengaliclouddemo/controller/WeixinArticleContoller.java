@@ -3,6 +3,7 @@ package com.liugeng.liugengaliclouddemo.controller;
 import java.nio.charset.Charset;
 import java.util.Collections;
 
+import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -35,9 +36,10 @@ public class WeixinArticleContoller {
 		return articleService.getArticleList();
 	}
 
-	@GetMapping("/listString")
-	public String getArticleListString() {
-		return articleService.getArticleListString();
+	@GetMapping("/article")
+	public String getArticle() throws Exception {
+		WeixinArticleList articleList = articleService.getArticleList();
+		return StringEscapeUtils.unescapeJson(articleList.getItem().get(0).getContent().getNewsItem().get(0).getContent());
 	}
 
 
