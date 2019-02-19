@@ -1,8 +1,8 @@
 package com.liugeng.liugengaliclouddemo.controller;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
+import com.liugeng.liugengaliclouddemo.model.CommonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,13 +26,20 @@ public class UserController {
 	private UserDao userDao;
 
 	@GetMapping("")
-	public List<UserDto> getUsers() {
-		return userDao.findAll();
+	public CommonResponse<List<UserDto>> getUsers() {
+		CommonResponse<List<UserDto>> response = new CommonResponse<>();
+		response.setCode(0);
+		response.setMsg("获取user成功");
+		response.setData(userDao.findAll());
+		return response;
 	}
 
 	@GetMapping("/{account}")
-	public UserDto getUserByName(@PathVariable("account") String account) {
-		return userDao.findUserDtoByAccount(account);
+	public CommonResponse<UserDto> getUserByName(@PathVariable("account") String account) {
+		CommonResponse<UserDto> response = new CommonResponse<>();
+		response.setCode(0);
+		response.setData(userDao.findUserDtoByAccount(account));
+		return response;
 	}
 
 	@PostMapping("")

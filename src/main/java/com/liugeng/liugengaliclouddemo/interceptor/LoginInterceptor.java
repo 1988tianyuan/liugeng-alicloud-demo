@@ -33,6 +33,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			User user = (User) session.getAttribute("user");
 			if(null == user){
 				commonResponse.setCode(888);
+				commonResponse.setMsg("请先登录");
 				response.getWriter().write(objectMapper.writeValueAsString(commonResponse));
 				response.getWriter().flush();
 				return false;

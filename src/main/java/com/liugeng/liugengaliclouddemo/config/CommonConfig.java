@@ -33,4 +33,6 @@ public class CommonConfig {
 		restTemplate.setMessageConverters(messageConverters);
 		return restTemplate;
 	}
+
+
 }
