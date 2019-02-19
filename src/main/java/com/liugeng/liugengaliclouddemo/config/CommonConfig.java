@@ -19,7 +19,9 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 public class CommonConfig {
 
 	@Bean
-	public RestTemplate restTemplate(ObjectMapper objectMapper) {
+	public RestTemplate restTemplate() {
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
 		RestTemplate restTemplate =  new RestTemplate();
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
 		MappingJackson2HttpMessageConverter jsonMessageConverter = new MappingJackson2HttpMessageConverter();
@@ -31,12 +33,4 @@ public class CommonConfig {
 		restTemplate.setMessageConverters(messageConverters);
 		return restTemplate;
 	}
-
-	@Bean
-	public ObjectMapper objectMapper() {
-		ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
-		return objectMapper;
-	}
-
 }

@@ -25,13 +25,13 @@ public class UserDto{
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	protected Long id;
 
 	@Column
-	private String account;
+	protected String account;
 
 	@Column
-	private String name;
+	protected String name;
 
 	@Column
 	private String password;

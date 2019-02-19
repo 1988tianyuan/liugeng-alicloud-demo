@@ -4,6 +4,8 @@ import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +17,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.liugeng.liugengaliclouddemo.model.weixin.AccessTokenModel;
@@ -42,8 +45,13 @@ public class WeixinArticleService {
 	@Value("${weixin.appSecret}")
 	private String appSecret;
 
-	@Autowired
 	private ObjectMapper objectMapper;
+
+	@PostConstruct
+	public void setMapperCase() {
+		objectMapper = new ObjectMapper();
+		objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+	}
 
 	public String getAccessToken() {
 		String url = tokenUrl + "&" + "appId=" + appId + "&secret=" + appSecret;
