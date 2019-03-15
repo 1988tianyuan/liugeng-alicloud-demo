@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +20,7 @@ import com.liugeng.liugengaliclouddemo.model.User;
 import com.sun.xml.internal.ws.api.pipe.ContentType;
 
 @Component
+@CrossOrigin(allowCredentials = "true")
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 	@Autowired
@@ -40,7 +42,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				commonResponse.setMsg("请先登录");
 				response.setStatus(403);
 				response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-				response.setHeader("Access-Control-Allow-Origin", "*");
+				response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+				response.setHeader("Access-Control-Allow-Credentials", "true");
 				response.getWriter().write(objectMapper.writeValueAsString(commonResponse));
 				response.getWriter().flush();
 				return false;

@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true")
 @RequestMapping("/user")
 public class UserController {
 

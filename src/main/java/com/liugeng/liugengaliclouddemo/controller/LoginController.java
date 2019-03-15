@@ -15,7 +15,7 @@ import com.liugeng.liugengaliclouddemo.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true")
 @Slf4j
 public class LoginController {
 
