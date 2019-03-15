@@ -28,17 +28,17 @@ public class UserController {
 	@GetMapping("")
 	public CommonResponse<List<UserDto>> getUsers() {
 		CommonResponse<List<UserDto>> response = new CommonResponse<>();
+		response.setData(userDao.findAll());
 		response.setCode(0);
 		response.setMsg("获取user成功");
-		response.setData(userDao.findAll());
 		return response;
 	}
 
 	@GetMapping("/{account}")
 	public CommonResponse<UserDto> getUserByName(@PathVariable("account") String account) {
 		CommonResponse<UserDto> response = new CommonResponse<>();
-		response.setCode(0);
 		response.setData(userDao.findUserDtoByAccount(account));
+		response.setCode(0);
 		return response;
 	}
 

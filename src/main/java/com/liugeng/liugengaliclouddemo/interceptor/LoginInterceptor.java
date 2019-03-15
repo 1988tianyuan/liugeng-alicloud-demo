@@ -1,5 +1,7 @@
 package com.liugeng.liugengaliclouddemo.interceptor;
 
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,12 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liugeng.liugengaliclouddemo.model.CommonResponse;
 import com.liugeng.liugengaliclouddemo.model.User;
+import com.sun.xml.internal.ws.api.pipe.ContentType;
 
 @Component
 public class LoginInterceptor extends HandlerInterceptorAdapter {
@@ -34,6 +38,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			if(null == user){
 				commonResponse.setCode(888);
 				commonResponse.setMsg("请先登录");
+				response.setStatus(403);
+				response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+				response.setHeader("Access-Control-Allow-Origin", "*");
 				response.getWriter().write(objectMapper.writeValueAsString(commonResponse));
 				response.getWriter().flush();
 				return false;
