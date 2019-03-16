@@ -1,7 +1,5 @@
 package com.liugeng.liugengaliclouddemo.interceptor;
 
-import java.nio.charset.CharacterCodingException;
-import java.nio.charset.Charset;
 import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +15,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liugeng.liugengaliclouddemo.model.CommonResponse;
 import com.liugeng.liugengaliclouddemo.model.User;
-import com.sun.xml.internal.ws.api.pipe.ContentType;
 
 @Component
 @CrossOrigin(allowCredentials = "true")
