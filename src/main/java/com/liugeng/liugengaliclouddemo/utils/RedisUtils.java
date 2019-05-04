@@ -7,7 +7,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -28,10 +31,15 @@ public class RedisUtils {
     public List<WeixinUserDto> getWeixinMsgListByPage(String chatKey, int start, int end) {
         return redisTemplate.execute((RedisCallback<List<WeixinUserDto>>) connection -> {
             byte[] key = redisTemplate.getStringSerializer().serialize(chatKey);
-            return connection.zRevRange(key, start, end)
-                    .stream()
-                    .map(bytes -> weixinUserSerializer.deserialize(bytes))
-                    .collect(Collectors.toList());
+            Set<byte[]> bytesSet = connection.zRevRange(key, start, end);
+            if (bytesSet == null) {
+                return new LinkedList<>();
+            } else {
+                return bytesSet
+                        .stream()
+                        .map(bytes -> weixinUserSerializer.deserialize(bytes))
+                        .collect(Collectors.toList());
+            }
         });
     }
 }
